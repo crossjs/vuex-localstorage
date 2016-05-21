@@ -1,0 +1,12 @@
+{
+  "extends": "../../.eslintrc",
+  "env": {
+    "mocha": true
+  },
+  "globals": {
+    "chai": false,
+    "assert": false,
+    "expect": false,
+    "should": false
+  }
+}

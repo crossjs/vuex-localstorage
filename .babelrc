@@ -1,0 +1,11 @@
+{
+  "env": {
+    "development": {
+      "presets": ["es2015", "stage-2"],
+      "plugins": ["add-module-exports", "transform-runtime"],
+    },
+    "production": {
+      "presets": ["es2015-rollup"]
+    }
+  }
+}
