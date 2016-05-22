@@ -9,20 +9,22 @@
 Sync [Vuex](https://github.com/vuejs/vuex) modules state to localStorage.
 
 ``` js
-import { getPersist, setPersist } from 'vuex-localstorage'
+import createPersist from 'vuex-localstorage'
 import { SET_ENV } from '../types'
 import { ENV_KEY } from '../constants'
 
+const persist = createPersist(ENV_KEY, {
+  lang: navigator.language.split('-')[0]
+})
+
 const state = {
-  env: getPersist(ENV_KEY, {
-    lang: navigator.language.split('-')[0]
-  })
+  env: persist.get()
 }
 
 const mutations = {
   [SET_ENV] (state, { payload }) {
     state.env = Object.assign({}, state.env, payload)
-    setPersist(ENV_KEY, state.env)
+    persist.set(state.env)
   }
 }
 
@@ -30,6 +32,18 @@ export default {
   state,
   mutations
 }
+```
+
+### Options
+
+``` js
+/**
+ * createPersist
+ * @param  {String} key             key
+ * @param  {Object} [initialState]  初始值/默认值
+ * @param  {Object} [config]        自定义 provider/serialize/deserialize
+ * @return {Object}                 get/set 方法
+ */
 ```
 
 ### Development Setup

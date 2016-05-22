@@ -1,6 +1,6 @@
 {
   "name": "vuex-localstorage",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Sync Vuex modules state to localstorage.",
   "main": "dist/index.js",
   "jsnext:main": "src/index.js",
