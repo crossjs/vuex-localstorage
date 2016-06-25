@@ -4,6 +4,7 @@
 *.old
 *.out
 
+.tools
 coverage
-dist
 node_modules
+test

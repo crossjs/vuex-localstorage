@@ -1,12 +1,15 @@
-# vuex-localstorage
-[![Travis](https://img.shields.io/travis/crossjs/vuex-localstorage.svg?style=flat-square)](https://github.com/crossjs/vuex-localstorage)
-[![Coveralls](https://img.shields.io/coveralls/crossjs/vuex-localstorage.svg?style=flat-square)](https://github.com/crossjs/vuex-localstorage)
+# VUEX-LOCALSTORAGE
+
+> :dvd: Sync [Vuex](https://github.com/vuejs/vuex) modules state to localStorage or some else storage.
+
+[![Travis](https://img.shields.io/travis/crossjs/vuex-localstorage.svg?style=flat-square)](https://travis-ci.org/crossjs/vuex-localstorage)
+[![Coveralls](https://img.shields.io/coveralls/crossjs/vuex-localstorage.svg?style=flat-square)](https://coveralls.io/github/crossjs/vuex-localstorage)
+[![dependencies](https://david-dm.org/crossjs/vuex-localstorage.svg?style=flat-square)](https://david-dm.org/crossjs/vuex-localstorage)
+[![devDependency Status](https://david-dm.org/crossjs/vuex-localstorage/dev-status.svg?style=flat-square)](https://david-dm.org/crossjs/vuex-localstorage#info=devDependencies)
 [![NPM version](https://img.shields.io/npm/v/vuex-localstorage.svg?style=flat-square)](https://npmjs.org/package/vuex-localstorage)
 
 
-### Introduction
-
-Sync [Vuex](https://github.com/vuejs/vuex) modules state to localStorage.
+## Usage
 
 ``` js
 import createPersist from 'vuex-localstorage'

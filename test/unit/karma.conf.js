@@ -17,7 +17,7 @@ const karmaConfig = {
   singleRun: !argv.watch,
   frameworks: ['mocha'],
   preprocessors: {
-    ['test/unit/index.js']: ['webpack', 'sourcemap']
+    'test/unit/index.js': ['webpack', 'sourcemap']
   },
   reporters: ['mocha', 'coverage'],
   coverageReporter: {

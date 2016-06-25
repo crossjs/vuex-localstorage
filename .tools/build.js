@@ -19,9 +19,8 @@ rollup.rollup({
 })
 .then(function (bundle) {
   var code = bundle.generate({
-    format: 'umd',
-    banner,
-    moduleName: 'vuexLocalStorage'
+    format: 'cjs',
+    banner
   }).code
   return write('dist/index.js', code).then(function () {
     return code
