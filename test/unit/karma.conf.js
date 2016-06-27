@@ -31,12 +31,6 @@ const karmaConfig = {
     devtool: 'inline-source-map',
     resolve: ['.js'],
     module: {
-      preLoaders: [{
-        test: /\.js$/,
-        include: /src/,
-        loader: 'isparta',
-        exclude: /node_modules/
-      }],
       loaders: [
         {
           test: /\.js$/,
