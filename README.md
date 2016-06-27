@@ -26,7 +26,7 @@ const state = {
 
 const mutations = {
   [SET_ENV] (state, { payload }) {
-    state.env = Object.assign({}, state.env, payload)
+    Object.assign(state.env, payload)
     persist.set(state.env)
   }
 }
