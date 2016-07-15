@@ -15,7 +15,7 @@ const karmaConfig = {
     }
   ],
   singleRun: !argv.watch,
-  frameworks: ['mocha'],
+  frameworks: ['mocha', 'es6-shim'],
   preprocessors: {
     'test/unit/index.js': ['webpack', 'sourcemap']
   },

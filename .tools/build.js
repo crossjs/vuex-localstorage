@@ -8,8 +8,8 @@ var version = process.env.VERSION || require('../package.json').version
 
 var banner =
   '/*!\n' +
-  ' * Vuex-LocalStorage v' + version + '\n' +
-  ' * (c) ' + new Date().getFullYear() + ' Rich Lee\n' +
+  ' * VUEX-LOCALSTORAGE v' + version + '\n' +
+  ' * (c) ' + new Date().getFullYear() + ' crossjs\n' +
   ' * Released under the MIT License.\n' +
   ' */'
 

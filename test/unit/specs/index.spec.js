@@ -56,4 +56,17 @@ describe('customize', () => {
     persist.set({ z: null })
     expect(persist.get()).to.eql({ z: null })
   })
+
+  it('with expires', done => {
+    const persist = createPersist('KEY6', { z: 1 }, {
+      // one second
+      expires: 1000
+    })
+    persist.set({ y: 1 })
+    expect(persist.get()).to.eql({ y: 1, z: 1 })
+    setTimeout(() => {
+      expect(persist.get()).to.eql({ z: 1 })
+      done()
+    }, 1000)
+  })
 })

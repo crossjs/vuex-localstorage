@@ -44,7 +44,7 @@ export default {
  * createPersist
  * @param  {String} key             key
  * @param  {Object} [initialState]  初始值/默认值
- * @param  {Object} [config]        自定义 provider/serialize/deserialize
+ * @param  {Object} [config]        自定义 provider/serialize/deserialize/expires
  * @return {Object}                 get/set 方法
  */
 ```
