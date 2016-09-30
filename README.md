@@ -8,8 +8,9 @@
 [![devDependency Status](https://david-dm.org/crossjs/vuex-localstorage/dev-status.svg?style=flat-square)](https://david-dm.org/crossjs/vuex-localstorage#info=devDependencies)
 [![NPM version](https://img.shields.io/npm/v/vuex-localstorage.svg?style=flat-square)](https://npmjs.org/package/vuex-localstorage)
 
-
 ## Usage
+
+[Live Example at PLATO](https://github.com/crossjs/plato/blob/next/src/store/modules/env.js#L12-L19)
 
 ``` js
 import createPersist from 'vuex-localstorage'
