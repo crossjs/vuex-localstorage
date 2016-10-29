@@ -22,7 +22,6 @@ then
   npm version $VERSION --message "bump $VERSION"
 
   # publish
-  git push origin refs/tags/$VERSION
   git push
   npm publish
 fi
