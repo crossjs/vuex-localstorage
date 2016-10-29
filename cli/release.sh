@@ -18,11 +18,11 @@ then
 
   # commit
   git add -A
-  git commit -m "* :tada: build $VERSION"
-  npm version $VERSION --message "* :bookmark: bump $VERSION"
+  git commit -m "build $VERSION"
+  npm version $VERSION --message "bump $VERSION"
 
   # publish
-  git push origin refs/tags/v$VERSION
+  git push origin refs/tags/$VERSION
   git push
   npm publish
 fi

@@ -4,7 +4,7 @@
 *.old
 *.out
 
-.tools
+cli
 coverage
 node_modules
 test

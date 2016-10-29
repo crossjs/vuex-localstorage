@@ -1,9 +1,7 @@
-process.env.BABEL_ENV = 'production'
-
 var fs = require('fs')
 var rollup = require('rollup')
 var uglify = require('uglify-js')
-var babel = require('rollup-plugin-babel')
+var buble = require('rollup-plugin-buble')
 var version = process.env.VERSION || require('../package.json').version
 
 var banner =
@@ -15,7 +13,7 @@ var banner =
 
 rollup.rollup({
   entry: 'src/index.js',
-  plugins: [babel()]
+  plugins: [buble()]
 })
 .then(function (bundle) {
   var code = bundle.generate({

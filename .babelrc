@@ -1,15 +1,10 @@
 {
-  "env": {
-    "development": {
-      "presets": ["es2015", "stage-0"],
-      "plugins": [
-        "add-module-exports",
-        ["__coverage__", { "ignore": "test/" }],
-        "transform-runtime"
-      ]
-    },
-    "production": {
-      "presets": ["es2015-rollup", "stage-0"]
-    }
-  }
+  "presets": [
+    "es2015",
+    "stage-0"
+  ],
+  "plugins": [
+    "add-module-exports",
+    ["__coverage__", { "ignore": "test/" }]
+  ]
 }

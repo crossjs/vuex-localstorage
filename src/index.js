@@ -24,7 +24,7 @@ export default function (key, initialState = {}, config) {
 
       try {
         const { value, expires } = deserialize(provider.getItem(key))
-        if (expires === 0 || expires > new Date().getTime()) {
+        if (expires === 0 || expires > Date.now()) {
           state = deserialize(value)
         }
       } catch (e) {
@@ -37,7 +37,7 @@ export default function (key, initialState = {}, config) {
       try {
         provider.setItem(key, serialize({
           value: serialize(value),
-          expires: expires ? expires + new Date().getTime() : expires
+          expires: expires ? expires + Date.now() : expires
         }))
       } catch (e) {
         // console.log(e)
