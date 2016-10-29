@@ -10,7 +10,7 @@
 
 ## Usage
 
-[Live Example at PLATO](https://github.com/crossjs/plato/blob/next/src/store/modules/env.js#L12-L19)
+[Live Example at PLATO](https://github.com/crossjs/plato/blob/master/src/store/modules/env.js#L12-L19)
 
 ``` js
 import createPersist from 'vuex-localstorage'
