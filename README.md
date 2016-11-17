@@ -38,15 +38,34 @@ export default {
 }
 ```
 
+With default key
+
+``` js
+const persist = createPersist()
+persist.set({ foo: 'bar' }) // equals to persist.set('default', { foo: 'bar' })
+persist.get() // equals to persist.get('default'), return { foo: 'bar' }
+```
+
+With customize keys
+
+``` js
+const persist = createPersist('my-namespace', { foo: { baz: 'bar' } })
+persist.get() // return { foo: { baz: 'bar' } }
+persist.get('foo') // return { baz: 'bar' }
+persist.set('foo', { baz: 'baz' }) // should NOT override initialState
+persist.get() // return { foo: { baz: 'bar' } }
+persist.get('foo') // return { baz: 'baz' }
+```
+
 ### Options
 
 ``` js
 /**
  * createPersist
- * @param  {String} key             key
+ * @param  {String} [namespace]     命名空间
  * @param  {Object} [initialState]  初始值/默认值
- * @param  {Object} [config]        自定义 provider/serialize/deserialize/expires
- * @return {Object}                 get/set 方法
+ * @param  {Object} [config]        配置 provider/serialize/deserialize/expires
+ * @return {Object}                 带 get/set 方法的对象
  */
 ```
 
