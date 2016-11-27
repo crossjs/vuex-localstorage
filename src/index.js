@@ -1,8 +1,9 @@
 /**
  * createPersist
+ *
  * @param  {String} namespace       namespace
  * @param  {Object} [initialState]  初始值/默认值
- * @param  {Object} [config]        自定义 provider/serialize/deserialize/expires
+ * @param  {Object} [config]         自定义 provider/serialize/deserialize/expires
  * @return {Object}                 get/set 方法
  */
 export default function (namespace, initialState = {}, config) {
@@ -23,6 +24,12 @@ export default function (namespace, initialState = {}, config) {
   }
 
   return {
+    /**
+     * get
+     *
+     * @param  {String} key   key, defaults to 'default'
+     * @return {Object}       plain object
+     */
     get (key = 'default') {
       let state
 
@@ -38,6 +45,13 @@ export default function (namespace, initialState = {}, config) {
 
       return Object.assign({}, key === 'default' ? initialState : initialState[key], state)
     },
+    /**
+     * set
+     *
+     * @param  {String} key   key
+     * @param  {Object} value plain object
+     * @return {undifined}
+     */
     set (key, value) {
       if (arguments.length === 1) {
         value = key
@@ -55,6 +69,6 @@ export default function (namespace, initialState = {}, config) {
   }
 }
 
-function rnd () {
+export function rnd () {
   return Date.now().toString(32) + Math.random().toString(32).slice(2)
 }
