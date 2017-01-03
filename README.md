@@ -8,6 +8,12 @@
 [![devDependency Status](https://david-dm.org/crossjs/vuex-localstorage/dev-status.svg?style=flat-square)](https://david-dm.org/crossjs/vuex-localstorage?type=dev)
 [![NPM version](https://img.shields.io/npm/v/vuex-localstorage.svg?style=flat-square)](https://npmjs.org/package/vuex-localstorage)
 
+## Notice
+
+It's NOT a Vuex plugin.
+
+If you are looking for a Vuex plugin, see: https://github.com/robinvdvleuten/vuex-persistedstate
+
 ## Usage
 
 [Live Example at PLATO](https://github.com/crossjs/plato/blob/master/src/store/modules/env.js#L12-L19)
