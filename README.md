@@ -14,6 +14,28 @@ It's NOT a Vuex plugin.
 
 If you are looking for a Vuex plugin, see: https://github.com/robinvdvleuten/vuex-persistedstate
 
+Here is a example for using them together:
+
+``` js
+import { Store } from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
+import createPersist from 'vuex-localstorage'
+
+const persist = createPersist('namespace-for-state', {
+  // initial state
+}, {
+  // ONE_WEEK
+  expires: 7 * 24 * 60 * 60 * 1e3
+})
+
+new Store({
+  plugins: [createPersistedState({
+    getState: persist.get,
+    setState: persist.set
+  })]
+}
+```
+
 ## Usage
 
 [Live Example at PLATO](https://github.com/crossjs/plato/blob/master/src/store/modules/env.js#L12-L19)
