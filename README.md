@@ -19,9 +19,9 @@ Here is a example for using them together:
 ``` js
 import { Store } from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
-import createPersist from 'vuex-localstorage'
+import createStorage from 'vuex-localstorage'
 
-const persist = createPersist('namespace-for-state', {
+const storage = createStorage('namespace-for-state', {
   // initial state
 }, {
   // ONE_WEEK
@@ -30,8 +30,8 @@ const persist = createPersist('namespace-for-state', {
 
 new Store({
   plugins: [createPersistedState({
-    getState: persist.get,
-    setState: persist.set
+    getState: storage.get,
+    setState: storage.set
   })]
 }
 ```
