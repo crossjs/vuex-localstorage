@@ -11,11 +11,15 @@ export default function (namespace, initialState = {}, config) {
     provider,
     serialize,
     deserialize,
+    merge,
     expires
   } = Object.assign({
     provider: localStorage,
     serialize: JSON.stringify,
     deserialize: JSON.parse,
+    merge (initialState, persistedState) {
+      return Object.assign({}, initialState, persistedState)
+    },
     expires: 0 // never expires
   }, config)
 
@@ -43,7 +47,7 @@ export default function (namespace, initialState = {}, config) {
         // console.log(e)
       }
 
-      return Object.assign({}, key === 'default' ? initialState : initialState[key], state)
+      return merge(key === 'default' ? initialState : initialState[key], state)
     },
     /**
      * set

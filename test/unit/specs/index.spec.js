@@ -1,13 +1,13 @@
-import createPersist, { rnd } from '../../../src'
+import createPersist from '../../../src'
 
 describe('getPersist', () => {
   it('init', () => {
-    const persist = createPersist(rnd())
+    const persist = createPersist()
     expect(persist.get()).to.eql({})
   })
 
   it('with initialState', () => {
-    const persist = createPersist(rnd(), { x: 1 })
+    const persist = createPersist(null, { x: 1 })
     expect(persist.get()).to.eql({ x: 1 })
   })
 
@@ -25,19 +25,19 @@ describe('getPersist', () => {
 
 describe('setPersist', () => {
   it('with initialState', () => {
-    const persist = createPersist(rnd(), { z: 1 })
+    const persist = createPersist(null, { z: 1 })
     persist.set({ y: 1 })
     expect(persist.get()).to.eql({ y: 1, z: 1 })
   })
 
   it('key should default to `default`', () => {
-    const persist = createPersist(rnd(), { z: 1 })
+    const persist = createPersist(null, { z: 1 })
     persist.set({ y: 1 })
     expect(persist.get()).to.eql({ y: 1, z: 1 })
   })
 
   it('override initialState', () => {
-    const persist = createPersist(rnd(), { z: 1 })
+    const persist = createPersist(null, { z: 1 })
     persist.set({ z: 0 })
     expect(persist.get()).to.eql({ z: 0 })
     persist.set({ z: null })
@@ -46,14 +46,14 @@ describe('setPersist', () => {
 
   describe('with key', () => {
     it('with initialState', () => {
-      const persist = createPersist(rnd(), { z: 1 })
+      const persist = createPersist(null, { z: 1 })
       persist.set('key1', { y: 1 })
       expect(persist.get('key1')).to.eql({ y: 1 })
       expect(persist.get()).to.eql({ z: 1 })
     })
 
     it('override initialState', () => {
-      const persist = createPersist(rnd(), { z: 1 })
+      const persist = createPersist(null, { z: 1 })
       expect(persist.get()).to.eql({ z: 1 })
       persist.set('key2', { z: 0 })
       expect(persist.get('key2')).to.eql({ z: 0 })
@@ -67,7 +67,7 @@ describe('setPersist', () => {
 
 describe('customize', () => {
   it('with sessionStorage', () => {
-    const persist = createPersist(rnd(), { z: 1 }, {
+    const persist = createPersist(null, { z: 1 }, {
       provider: sessionStorage
     })
     persist.set({ y: 1 })
@@ -76,7 +76,7 @@ describe('customize', () => {
 
   it('serialize/deserialize', () => {
     const value = {}
-    const persist = createPersist(rnd(), { z: 1 }, {
+    const persist = createPersist(null, { z: 1 }, {
       provider: {
         getItem (key) {
           return value[key]
@@ -95,7 +95,7 @@ describe('customize', () => {
   })
 
   it('with expires', done => {
-    const persist = createPersist(rnd(), { z: 1 }, {
+    const persist = createPersist(null, { z: 1 }, {
       // one second
       expires: 1000
     })
@@ -103,6 +103,24 @@ describe('customize', () => {
     expect(persist.get()).to.eql({ y: 1, z: 1 })
     setTimeout(() => {
       expect(persist.get()).to.eql({ z: 1 })
+      done()
+    }, 1000)
+  })
+
+  it('with merge', done => {
+    const persist = createPersist(null, { z: 1 }, {
+      merge (a, b) {
+        // always return persisted
+        return b
+      },
+      // one second
+      expires: 1000
+    })
+    persist.set({ y: 1 })
+    expect(persist.get()).to.eql({ y: 1 })
+    setTimeout(() => {
+      // expired to undefined
+      expect(persist.get()).to.be.undifined
       done()
     }, 1000)
   })
