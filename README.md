@@ -1,6 +1,6 @@
 # VUEX-LOCALSTORAGE
 
-> :dvd: Sync [Vuex](https://github.com/vuejs/vuex) modules state to localStorage or some else storage.
+> :dvd: Manage data with expires by localStorage or some else storage.
 
 [![Travis](https://img.shields.io/travis/crossjs/vuex-localstorage.svg?style=flat-square)](https://travis-ci.org/crossjs/vuex-localstorage)
 [![Coveralls](https://img.shields.io/coveralls/crossjs/vuex-localstorage.svg?style=flat-square)](https://coveralls.io/github/crossjs/vuex-localstorage)
@@ -36,35 +36,9 @@ new Store({
 }
 ```
 
+[Live Example at PLATO](https://github.com/crossjs/plato/blob/master/src/modules/persist/index.js)
+
 ## Usage
-
-[Live Example at PLATO](https://github.com/crossjs/plato/blob/master/src/store/modules/env.js#L12-L19)
-
-``` js
-import createPersist from 'vuex-localstorage'
-import { SET_ENV } from '../types'
-import { ENV_KEY } from '../constants'
-
-const persist = createPersist(ENV_KEY, {
-  lang: navigator.language.split('-')[0]
-})
-
-const state = {
-  env: persist.get()
-}
-
-const mutations = {
-  [SET_ENV] (state, { payload }) {
-    Object.assign(state.env, payload)
-    persist.set(state.env)
-  }
-}
-
-export default {
-  state,
-  mutations
-}
-```
 
 With default key
 
