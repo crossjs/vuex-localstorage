@@ -1,6 +1,6 @@
 {
   "name": "vuex-localstorage",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "description": ":dvd: Persist Vuex state with expires by localStorage or some else storage.",
   "main": "dist/index.js",
   "jsnext:main": "src/index.js",
