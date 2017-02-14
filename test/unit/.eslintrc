@@ -4,9 +4,8 @@
     "mocha": true
   },
   "globals": {
-    "chai": false,
+    "sinon": false,
     "assert": false,
-    "expect": false,
-    "should": false
+    "expect": false
   }
 }

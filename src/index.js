@@ -1,30 +1,24 @@
+let index = Date.now()
+
 /**
- * createPersist
+ * createStorage
  *
  * @param  {String} namespace       namespace
  * @param  {Object} [initialState]  初始值/默认值
  * @param  {Object} [config]         自定义 provider/serialize/deserialize/expires
  * @return {Object}                 get/set 方法
  */
-export default function (namespace, initialState = {}, config) {
-  const {
-    provider,
-    serialize,
-    deserialize,
-    merge,
-    expires
-  } = Object.assign({
-    provider: localStorage,
-    serialize: JSON.stringify,
-    deserialize: JSON.parse,
-    merge (initialState, persistedState) {
-      return Object.assign({}, initialState, persistedState)
-    },
-    expires: 0 // never expires
-  }, config)
-
+export function createStorage ({
+  namespace,
+  initialState = {},
+  provider = localStorage,
+  serialize = JSON.stringify,
+  deserialize = JSON.parse,
+  expires = 0, // never expires
+  merge = defaultMerge
+} = {}) {
   if (!namespace) {
-    namespace = rnd()
+    namespace = `vuex-${++index}`
   }
 
   return {
@@ -73,6 +67,49 @@ export default function (namespace, initialState = {}, config) {
   }
 }
 
-export function rnd () {
-  return Date.now().toString(32) + Math.random().toString(32).slice(2)
+export default function createPersist ({
+  namespace,
+  initialState,
+  provider,
+  serialize,
+  deserialize,
+  expires,
+  merge = defaultMerge,
+  reducer = defaultReducer,
+  paths = []
+} = {}) {
+  return store => {
+    const storage = createStorage({
+      namespace,
+      initialState,
+      provider,
+      serialize,
+      deserialize,
+      merge,
+      expires
+    })
+
+    store.replaceState(
+      merge(store.state, storage.get())
+    )
+
+    store.subscribe((mutation, state) => {
+      storage.set(reducer(state, paths))
+    })
+  }
+}
+
+function defaultMerge (...args) {
+  return Object.assign({}, ...args)
+}
+
+function defaultReducer (state, paths) {
+  return paths.length === 0
+  ? state
+  : paths.reduce((substate, path) => {
+    if (state.hasOwnProperty(path)) {
+      return Object.assign(substate, { [path]: state[path] })
+    }
+    return substate
+  }, {})
 }

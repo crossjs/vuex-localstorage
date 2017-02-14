@@ -2,11 +2,14 @@
 // Test Environment Setup
 // ---------------------------------------
 import chai from 'chai'
+import sinonChai from 'sinon-chai'
 
-global.chai = chai
+localStorage.clear()
+
+chai.use(sinonChai)
+
 global.assert = chai.assert
 global.expect = chai.expect
-global.should = chai.should()
 
 // ---------------------------------------
 // Require Tests

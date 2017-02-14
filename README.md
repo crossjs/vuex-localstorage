@@ -1,6 +1,6 @@
 # VUEX-LOCALSTORAGE
 
-> :dvd: Manage data with expires by localStorage or some else storage.
+> :dvd: Persist Vuex state with expires by localStorage or some else storage.
 
 [![Travis](https://img.shields.io/travis/crossjs/vuex-localstorage.svg?style=flat-square)](https://travis-ci.org/crossjs/vuex-localstorage)
 [![Coveralls](https://img.shields.io/coveralls/crossjs/vuex-localstorage.svg?style=flat-square)](https://coveralls.io/github/crossjs/vuex-localstorage)
@@ -8,70 +8,25 @@
 [![devDependency Status](https://david-dm.org/crossjs/vuex-localstorage/dev-status.svg?style=flat-square)](https://david-dm.org/crossjs/vuex-localstorage?type=dev)
 [![NPM version](https://img.shields.io/npm/v/vuex-localstorage.svg?style=flat-square)](https://npmjs.org/package/vuex-localstorage)
 
-## Notice
-
-It's NOT a Vuex plugin.
-
-If you are looking for a Vuex plugin, see: https://github.com/robinvdvleuten/vuex-persistedstate
-
-Here is a example for using them together:
+## Usage
 
 ``` js
 import { Store } from 'vuex'
-import createPersistedState from 'vuex-persistedstate'
-import createStorage from 'vuex-localstorage'
-
-const storage = createStorage('namespace-for-state', {
-  // initial state
-}, {
-  // ONE_WEEK
-  expires: 7 * 24 * 60 * 60 * 1e3
-})
+import createPersist, { createStorage } from 'vuex-localstorage'
 
 new Store({
-  plugins: [createPersistedState({
-    getState: storage.get,
-    setState: storage.set
+  plugins: [createPersist({
+    namespace: 'namespace-for-state'
+    initialState: {},
+    // ONE_WEEK
+    expires: 7 * 24 * 60 * 60 * 1e3
   })]
 }
 ```
 
-[Live Example at PLATO](https://github.com/crossjs/plato/blob/master/src/modules/persist/index.js)
+[Live Example at PLATO](https://github.com/platojs/plato/blob/master/src/modules/persist/index.js)
 
-## Usage
-
-With default key
-
-``` js
-const persist = createPersist()
-persist.set({ foo: 'bar' }) // equals to persist.set('default', { foo: 'bar' })
-persist.get() // equals to persist.get('default'), return { foo: 'bar' }
-```
-
-With customize keys
-
-``` js
-const persist = createPersist('my-namespace', { foo: { baz: 'bar' } })
-persist.get() // return { foo: { baz: 'bar' } }
-persist.get('foo') // return { baz: 'bar' }
-persist.set('foo', { baz: 'baz' }) // should NOT override initialState
-persist.get() // return { foo: { baz: 'bar' } }
-persist.get('foo') // return { baz: 'baz' }
-```
-
-### Options
-
-``` js
-/**
- * createPersist
- * @param  {String} [namespace]     命名空间
- * @param  {Object} [initialState]  初始值/默认值
- * @param  {Object} [config]        配置 provider/serialize/deserialize/expires
- * @return {Object}                 带 get/set 方法的对象
- */
-```
-
-### Development Setup
+## Development Setup
 
 ``` bash
 # install deps
@@ -86,6 +41,10 @@ npm test
 # run unit tests only
 npm run unit
 ```
+
+## Special Thanks
+
+[vuex-persistedstate](https://github.com/robinvdvleuten/vuex-persistedstate)
 
 ## License
 

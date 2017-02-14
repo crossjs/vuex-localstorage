@@ -7,6 +7,7 @@ const karmaConfig = {
   basePath: '../../', // project root in relation to bin/karma.js
   files: [
     './node_modules/phantomjs-polyfill/bind-polyfill.js',
+    './node_modules/sinon/pkg/sinon.js',
     {
       pattern: './test/unit/index.js',
       watched: false,
