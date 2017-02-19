@@ -12,7 +12,7 @@
 
 ``` js
 import { Store } from 'vuex'
-import createPersist, { createStorage } from 'vuex-localstorage'
+import createPersist from 'vuex-localstorage'
 
 new Store({
   plugins: [createPersist({
