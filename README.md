@@ -16,7 +16,7 @@ import createPersist from 'vuex-localstorage'
 
 new Store({
   plugins: [createPersist({
-    namespace: 'namespace-for-state'
+    namespace: 'namespace-for-state',
     initialState: {},
     // ONE_WEEK
     expires: 7 * 24 * 60 * 60 * 1e3
