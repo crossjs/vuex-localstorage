@@ -1,12 +1,24 @@
 let index = Date.now()
 
 /**
- * createStorage
+ * 创建数据存储器
  *
- * @param  {String} namespace       namespace
- * @param  {Object} [initialState]  初始值/默认值
- * @param  {Object} [config]         自定义 provider/serialize/deserialize/expires
- * @return {Object}                 get/set 方法
+ * @method createStorage
+ * @param  {object}      [param]                            配置项
+ * @param  {string}      [param.namespace]                  命名空间，用于数据隔离
+ * @param  {object}      [param.initialState={}]            默认数据
+ * @param  {object}      [param.provider=localStorage]      基础存储器，必须拥有 getItem 与 setItem 方法
+ * @param  {function}    [param.serialize=JSON.stringify]   序列化方法
+ * @param  {function}    [param.deserialize=JSON.parse]     反序列化方法
+ * @param  {number}      [param.expires=0]                  过期时间，以毫秒为单位
+ * @param  {function}    [param.merge]                      用于数据合并的方法
+ * @return {object}                                         数据存储器
+ * @example
+ * const storage = createStorage()
+ * storage.set({ x: 1 })
+ * storage.get() // return { x: 1 }
+ * storage.set('my-key', { x: 1 })
+ * storage.get('my-key') // return { x: 1 }
  */
 export function createStorage ({
   namespace,
@@ -23,10 +35,11 @@ export function createStorage ({
 
   return {
     /**
-     * get
+     * Get the value of the provided key
      *
-     * @param  {String} key   key, defaults to 'default'
-     * @return {Object}       plain object
+     * @method get
+     * @param  {string} [key='default'] key
+     * @return {object}                 A plainobject value
      */
     get (key = 'default') {
       let state
@@ -43,12 +56,13 @@ export function createStorage ({
 
       return merge(key === 'default' ? initialState : initialState[key], state)
     },
+
     /**
-     * set
+     * Add or update a key with a plainobject value
      *
-     * @param  {String} key   key
-     * @param  {Object} value plain object
-     * @return {undifined}
+     * @method set
+     * @param  {string} [key='default'] key
+     * @param  {object} value           A plainobject value
      */
     set (key, value) {
       if (arguments.length === 1) {
@@ -67,6 +81,29 @@ export function createStorage ({
   }
 }
 
+/**
+ * 创建 Vuex 持久化插件
+ *
+ * @method createPersist
+ * @param  {object}     [param]                 配置项
+ * @param  {string}     [param.namespace]       命名空间，用于数据隔离
+ * @param  {object}     [param.initialState]    默认数据
+ * @param  {object}     [param.provider]        基础存储器，必须拥有 getItem 与 setItem 方法
+ * @param  {function}   [param.serialize]       序列化方法
+ * @param  {function}   [param.deserialize]     反序列化方法
+ * @param  {number}     [param.expires]         过期时间，以毫秒为单位
+ * @param  {function}   [param.merge]           用于数据合并的方法
+ * @param  {function}   [param.reducer]         用于数据过滤的方法
+ * @param  {string[]}   [param.paths = []]      需要持久化的数据的路径，state 的 keys。
+ *                                              如需处理更多层级，可以配合自定义 reducer 实现
+ * @return {function(store: object)}            插件函数
+ * @example
+ * const plugin = createPersist()
+ * const store = new Vuex.Store({
+ *   // ...
+ *   plugins: [plugin]
+ * })
+ */
 export default function createPersist ({
   namespace,
   initialState,
